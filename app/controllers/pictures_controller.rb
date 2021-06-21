@@ -7,13 +7,15 @@ class PicturesController < ApplicationController
     @picture =Picture.new
   end
   def create
-    Picture.create(picture_params)
-    # @picture = current_user.picture.build(picture_params)
-    if @picture.save
-    redirect_to pictures_path, notice:"投稿しました！"
-    else
-    render :new
+    @picture = current_user.pictures.build(picture_params)
+    if params[:back]
+      render :new
+      if @picture.save
+        redirect_to pictures_path, notice:"投稿しました！"
+      else
+        render :new
     end
+  end
   end
   def show
     # @picture = Picture.find(params[:id])
@@ -32,7 +34,11 @@ class PicturesController < ApplicationController
   def destroy
   @picture.destroy
   redirect_to pictures_path, notice:"ブログを削除しました！"
-end
+  end
+  def confirm
+    @picture = Picture.new(picture_params)
+    render :new if @blog.invalid?
+  end
   private
   def picture_params
     params.require(:picture).permit(:title, :content)
