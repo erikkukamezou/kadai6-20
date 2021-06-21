@@ -36,12 +36,12 @@ class PicturesController < ApplicationController
   redirect_to pictures_path, notice:"ブログを削除しました！"
   end
   def confirm
-    @picture = Picture.new(picture_params)
-    render :new if @blog.invalid?
+    @picture = current_user.pictures.build(picture_params)
+    render :new if @picture.invalid?
   end
   private
   def picture_params
-    params.require(:picture).permit(:title, :content)
+    params.require(:picture).permit(:title, :content, :image, :image_cache)
   end
   def set_picture
     @picture = Picture.find(params[:id])
