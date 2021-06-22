@@ -1,0 +1,28 @@
+<table>
+  <caption>ブックマーク一覧</caption>
+  <thead>
+    <tr>
+      <th>投稿者名</th>
+      <th>タイトル</th>
+      <th>本文</th>
+      <p id="notice"><%= notice %></p>
+      <p>
+        <strong>Image:</strong>
+        <%= image_tag @user.image.url %>
+      </p>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bookmark.each do |bookmark| %>
+      <tr>
+        <td><%= bookmark.picture.user.name %></td>
+        <td>
+          <%= link_to picture_path(bookmark.picture) do %>
+            <%= bookmark.picture.title %>
+          <% end %>
+        </td>
+        <td><%= bookmark.picture.body %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

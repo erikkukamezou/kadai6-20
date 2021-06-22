@@ -1,18 +1,24 @@
 <h1>投稿一覧</h1>
 <table>
   <tr>
+    <th>投稿者</th>
     <th>タイトル</th>
     <th>内容</th>
   </tr>
-<% @pictures.each do |picture| %>
-  <tr>
-    <td><%= picture.title %></td>
-    <td><%= picture.content %></td>
-    <td><%= link_to '詳細を確認する', picture_path(picture.id) %></td>
-    <td><%= link_to "編集する", edit_picture_path(picture.id) %></td>
-    <td><%= link_to '削除する', picture_path(picture.id), method: :delete %></td>
-  </tr>
-<% end %>
+  <% @pictures.each do |picture| %>
+    <tr>
+      <td><%= picture.user.name%></td>
+      <td><%= picture.title %></td>
+      <td><%= picture.content %></td>
+      <% if user_signed_in? && @picture.user == current_user %>
+        <td><%= link_to '詳細を確認する', picture_path(picture.id) %></td>
+        <td><%= link_to "編集する", edit_picture_path(picture.id) %></td>
+        <td><%= link_to '削除する', picture_path(picture.id), method: :delete %></td>
+      <% end %>
+    </tr>
+  <% end %>
 </table>
 <br>
-<%= link_to '新しく投稿する', new_picture_path %>
+<% if user_signed_in? %>
+  <%= link_to '新しく投稿する', new_picture_path %>
+<% end %>

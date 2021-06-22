@@ -1,4 +1,12 @@
 <h1>登録情報</h1>
 <h2><%= @user.name %>のページ</h2>
 <p>メールアドレス: <%= @user.email %></p>
+<p>プロフィール</p>
+<p id="notice"><%= notice %></p>
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @user.image.url %>
+</p>
+<%= link_to 'ユーザー情報を更新する', edit_user_path %>
 <%= link_to '一覧画面に戻る', pictures_path %>
+<%= link_to 'お気に入り一覧', bookmarks_path %>
