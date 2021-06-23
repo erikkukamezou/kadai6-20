@@ -1,14 +1,5 @@
 <h1>ユーザー情報の更新</h1>
-<% if @user.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this <%= @user.name %> from being saved:</h2>
-    <ul>
-    <% @user.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
+
 <%= form_with(model: @user, local: true) do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
@@ -18,9 +9,9 @@
   <%= f.password_field :password %>
   <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation %>
-  <div class="field">
-  <%= form.label :image %>
-  <%= form.file_field :image %>
-  </div>
+  <%= f.label :プロフィール %>
+  <%= f.file_field :image %>
   <%= f.submit "Create my account" %>
 <% end %>
+<%= link_to '一覧画面に戻る', pictures_path %>
+<%= link_to 'お気に入り一覧', bookmarks_path %>

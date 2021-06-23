@@ -17,15 +17,15 @@ class PicturesController < ApplicationController
     else
       if @picture.save
         redirect_to pictures_path, notice:"投稿しました！"
-        NotificationMailer.send_confirm_to_picture(@picture).deliver
+        # NotificationMailer.send_confirm_to_picture(@picture).deliver
       else
         render :new
       end
-      if @picture.user == current_user
-          render "edit"
-        else
-          redirect_to pictures_path
-      end
+      # if @picture.user == current_user
+      #     render "edit"
+      #   else
+      #     redirect_to pictures_path
+      # end
     end
   end
 

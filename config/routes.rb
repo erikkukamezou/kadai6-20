@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'bookmarks_users/index'
   # get 'pictures/index'
   get 'users/new'
   resources :sessions, only: [:new, :create, :destroy]
@@ -10,8 +11,8 @@ Rails.application.routes.draw do
       post :confirm
     end
   end
-  resources :pictures, except: [:index] do
-    resource :bookmarks, only: [:create, :destroy,]
-  end
+  # resources :pictures, except: [:index] do
+    resources :bookmarks, only: [:create, :destroy]
+  # end
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end

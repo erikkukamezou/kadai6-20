@@ -3,8 +3,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @picture =@user.pictures
 
-    bookmarks =Bookmark.where(user_id: current_user.id).pluck(:picture_id)  # ログイン中のユーザーのお気に入りのpost_idカラムを取得
-    @bookmark_list = Picture.find(bookmarks)     # postsテーブルから、お気に入り登録済みのレコードを取得
+    # bookmarks =Bookmark.where(user_id: current_user.id).pluck(:picture_id)  # ログイン中のユーザーのお気に入りのpost_idカラムを取得
+    # @bookmark_list = Picture.find(bookmarks)     # postsテーブルから、お気に入り登録済みのレコードを取得
   end
   def new
     @user = User.new
@@ -17,14 +17,20 @@ class UsersController < ApplicationController
       render :new
     end
   end
+
   def edit
   end
+
   def update
     if @user.update(user_params)
       redirect_to user_path, notice: "編集しました！"
     else
       render :edit
     end
+  end
+  def edit
+  end
+  def bookmark
   end
 
   private
