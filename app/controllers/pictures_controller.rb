@@ -62,7 +62,7 @@ class PicturesController < ApplicationController
   end
 
   def confirm
-    @picture = current_user.pictures.build(picture_params)
+    @picture = current_user.picture.build(picture_params)
     render :new if @picture.invalid?
   end
 
