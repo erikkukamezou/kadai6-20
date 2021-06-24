@@ -3,7 +3,7 @@ class PicturesController < ApplicationController
   #before_action :authenticate_user!
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
   def index
-    @pictures = Picture.all
+    @pictures = Picture.all.order(created_at: :desc)
   end
 
   def new
@@ -16,7 +16,9 @@ class PicturesController < ApplicationController
       render :new
     else
       if @picture.save
+        PictureMailer.picture_mail(@picture).deliver
         redirect_to pictures_path, notice:"投稿しました！"
+          ##追記
         # NotificationMailer.send_confirm_to_picture(@picture).deliver
       else
         render :new
@@ -32,7 +34,7 @@ class PicturesController < ApplicationController
   def show
     # @picture = Picture.find(params[:id])
     @picture = Picture.includes(:user).find(params[:id])
-    @bookmark = current_user.bookmarks.find_by(picture_id: @picture.id)
+    # @bookmark = current_user.bookmarks.find_by(picture_id: @picture.id)
   end
 
   def edit
@@ -67,6 +69,8 @@ class PicturesController < ApplicationController
   # def mypage
   # @bookmarks = Bookmark.where(user_id: current_user.id)
   # end
+
+
 
   private
   def picture_params

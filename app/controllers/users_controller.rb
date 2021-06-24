@@ -31,6 +31,9 @@ class UsersController < ApplicationController
   def edit
   end
   def bookmark
+     @bookmarks =Bookmark.all
+    # @bookmark_pictures =current_user.bookmark_pictures
+  # @user = current_user.bookmark_pictures.includes(:user).order(created_at: :desc)
   end
 
   private

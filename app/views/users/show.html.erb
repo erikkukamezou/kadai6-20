@@ -1,4 +1,4 @@
-<h1>登録情報</h1>
+<h1 class ="information">登録情報</h1>
 <h2><%= @user.name %>のページ</h2>
 <p>メールアドレス: <%= @user.email %></p>
 <p>プロフィール</p>
@@ -9,4 +9,4 @@
 </p>
 <%= link_to 'ユーザー情報を更新する', edit_user_path %>
 <%= link_to '一覧画面に戻る', pictures_path %>
-<%= link_to 'お気に入り一覧', bookmarks_path %>
+<%= link_to 'お気に入り一覧', bookmark_users_path %>

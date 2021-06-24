@@ -1,4 +1,8 @@
 class BookmarksController < ApplicationController
+  # def index
+  #   bookmarks =current_user.bookmark.all
+  # end
+
   def create
     bookmark = current_user.bookmarks.create(picture_id: params[:picture_id])
     redirect_to pictures_path, notice: "#{bookmark.picture.user.name}さんのブログをお気に入り登録しました"
